@@ -21,15 +21,18 @@ const modal =document.getElementById("modal");
 
 //VARIABLES
 
+
 const players = {
-    playerOne : {name: "Jack", wins: 0},
-    playerTwo : {name: "Jill", wins: 0},
-};
-let move = 1;
-let nextPlayer = players.playerOne.name;
-let pastPlayer;
-let currentImage = "cross";
-let playerHasWon = false;
+    playerOne: { name: "Jack", wins: 0 },
+    playerTwo: { name: "Jill", wins: 0 },
+  };
+  
+  let move = 1;
+  let nextPlayer = players.playerOne.name;
+  let pastPlayer;
+  let currentImage = "cross";
+  let playerHasWon = false;
+  const classList = {};
 
 //SQUARE CLICKING
 function addSquareClick(){
@@ -43,8 +46,9 @@ function removeSquareClick(){
     });
 }
 function squareClick(){
-    if(!this.classList.contains("cross")&& !this.classList.contains("circle")){
-        this. classList.add(`${currentImage}`); // this mean square (the value inside that)
+    
+    if(!this.classList.contains("cross") && !this.classList.contains("circle")){
+        this.classList.add(`${currentImage}`);
        incrementMove();
     }
 }
@@ -53,61 +57,59 @@ function squareClick(){
 
     //INCREMENT MOVE
 
-    function incrementMove(){
+    function incrementMove() {
         move += 1;
-        if(move % 2 !== 0){
-            nextPlayer = players.playerOne.name;
-            pastPlayer = players.playerTwo.name;
-            currentImage = "cross";
-            infoText.innerHTML = `${players.playerOne.name}'s turn`;
-        }else{
-            nextPlayer = players.playerTwo.name;
-            pastPlayer = players.playerOne.name;
-            currentImage = "circle";
-            infoText.innerHTML = `${players.playerTwo.name}'s turn`;
-    }
-    checkForWin();
-    checkForTie();
-}
+        if (move % 2 !== 0) {
+          nextPlayer = players.playerOne.name;
+          pastPlayer = players.playerTwo.name;
+          currentImage = "cross";
+          infoText.innerHTML = `${players.playerOne.name}'s turn`;
+        } else {
+          nextPlayer = players.playerTwo.name;
+          pastPlayer = players.playerOne.name;
+          currentImage = "circle";
+          infoText.innerHTML = `${players.playerTwo.name}'s turn`;
+        }
+        checkForWin();
+        checkForTie();
+      }
 //CHECK FOR WIN
 function checkForWin(){
-    const lines=[
-        [squareOne,squareTwo,squareThree],
-        [squareFour,squareFive,squareSix],
-        [squareSeven,squareEight,squareNine],
-        [squareOne,squareFour,squareSeven],
-        [squareTwo,squareFive,squareEight],
-        [squareThree,squareSix,squareNine],
-        [squareOne,squareFive,squareNine],
-        [squareThree,squareFive,squareSeven],
-     ];
-     for (const line of lines){
-       
-        const hasCross = line.every((square) => 
-        square.classList.contains("cross"));
-        const hasCircle = line.every((square) => 
-            square.classList.contains("circle"));
-
-        if(hasCircle || hasCross){
-            const winner = hasCross ? players.playerOne : players.playerTwo;
-            winner.wins += 1;
-            updateScores();
-            playerWon();
-            return;
+    const lines = [
+        [squareOne, squareTwo, squareThree],
+        [squareFour, squareFive, squareSix],
+        [squareSeven, squareEight, squareNine],
+        [squareOne, squareFour, squareSeven],
+        [squareTwo, squareFive, squareEight],
+        [squareThree, squareSix, squareNine],
+        [squareOne, squareFive, squareNine],
+        [squareThree, squareFive, squareSeven],
+      ];
+      for (const line of lines) {
+        const hasCross = line.every((square) => square.classList.contains("cross"));
+        const hasCircle = line.every((square) =>
+          square.classList.contains("circle")
+        );
+        if (hasCross || hasCircle) {
+          const winner = hasCross ? players.playerOne : players.playerTwo;
+          winner.wins += 1;
+          updateScores();
+          playerWon();
+          return;
 
         }
       }
 }
 
-function updateScores(){
+function updateScores() {
     playerOneScore.innerHTML = players.playerOne.wins;
     playerTwoScore.innerHTML = players.playerTwo.wins;
 }
 
 function playerWon(){
-    infoText.innerHTML = `${pastPlayer} won!`;
-    playerHasWon = true;
-    continueGame();
+    infoText.innerHTML = `${pastPlayer} won!`  ;
+  playerHasWon = true;
+  continueGame();
 }
 
 //CHECK FOR TIE
@@ -122,15 +124,15 @@ function checkForTie(){
         squareSeven,
         squareEight,
         squareNine,
-    ];
+      ];
 
-    const allSquaresFilled = squares.every((square) => 
-    {return(
-        square.classList.contains("cross") || square.classList.contains("circle")
-    );
-});
-  if (allSquaresFilled && !playerHasWon){
-    infoText.innerHTML= "It's a tie!"
+      const allSquaresFilled = squares.every((square) => {
+        return (
+          square.classList.contains("cross") || square.classList.contains("circle")
+        );
+      });
+  if (allSquaresFilled && !playerHasWon) {
+    infoText.innerHTML = "It's a tie!";
     continueGame();
   }
 }
@@ -179,9 +181,9 @@ function startGame(){
         .value.trim().toLowerCase();
         
         const player1InputCap = 
-        player1Input.charAt(0).toUppercase() + player1Input.slice(1); 
+        player1Input.charAt(0).toUpperCase() + player1Input.slice(1); 
         const player2InputCap = 
-        player2Input.charAt(0).toUppercase() + player2Input.slice(1); 
+        player2Input.charAt(0).toUpperCase() + player2Input.slice(1); 
     
         players.playerOne.name = player1InputCap;
         players.playerTwo.name = player2InputCap;
