@@ -102,7 +102,7 @@ h1{
     background: var(--bg-brown);
 }
 .grid__square{
-    background: var(--bg-white);
+    background-color: var(--bg-white);
     border-radius: 0.3rem;
     border: var(--border);
 }
@@ -139,7 +139,7 @@ color: var(--text-white);
 
 /* MODAL */
 #modal{
-    display: flex;
+    display: none;
     align-items: center;
     position: absolute;
     justify-content: center;
@@ -181,7 +181,7 @@ input{
     font-style: italic;
 }
 
-innput[type="submit"]:active{
+input[type="submit"]:active{
     transform: translate(0.125rem);
 }
 
