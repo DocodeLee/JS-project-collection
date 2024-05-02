@@ -1,4 +1,4 @@
-//DOM ELEMENTS
+// DOM ELEMENTS
 
 const squareOne = document.getElementById("grid__square-1");
 const squareTwo = document.getElementById("grid__square-2");
@@ -10,7 +10,7 @@ const squareSeven = document.getElementById("grid__square-7");
 const squareEight = document.getElementById("grid__square-8");
 const squareNine = document.getElementById("grid__square-9");
 const allSquares = document.querySelectorAll(".grid__square");
-// dot is for targeting class
+
 const playerOneScore = document.getElementById("info__player__score1");
 const playerTwoScore = document.getElementById("info__player__score2");
 
@@ -19,7 +19,7 @@ const startGameBtn = document.getElementById("instructions__btn");
 
 const modal = document.getElementById("modal");
 
-//VARIABLES
+// VARIABLES
 
 const players = {
   playerOne: { name: "Jack", wins: 0 },
@@ -31,19 +31,21 @@ let nextPlayer = players.playerOne.name;
 let pastPlayer;
 let currentImage = "cross";
 let playerHasWon = false;
-const classList = {};
 
-//SQUARE CLICKING
+// SQUARE CLICKING
+
 function addSquareClick() {
   allSquares.forEach((square) => {
     square.addEventListener("click", squareClick);
   });
 }
+
 function removeSquareClick() {
   allSquares.forEach((square) => {
     square.removeEventListener("click", squareClick);
   });
 }
+
 function squareClick() {
   if (!this.classList.contains("cross") && !this.classList.contains("circle")) {
     this.classList.add(`${currentImage}`);
@@ -51,7 +53,7 @@ function squareClick() {
   }
 }
 
-//INCREMENT MOVE
+// INCREMENT MOVE
 
 function incrementMove() {
   move += 1;
@@ -69,7 +71,9 @@ function incrementMove() {
   checkForWin();
   checkForTie();
 }
-//CHECK FOR WIN
+
+// CHECK FOR WIN
+
 function checkForWin() {
   const lines = [
     [squareOne, squareTwo, squareThree],
@@ -107,7 +111,8 @@ function playerWon() {
   continueGame();
 }
 
-//CHECK FOR TIE
+// CHECK FOR TIE
+
 function checkForTie() {
   const squares = [
     squareOne,
@@ -126,13 +131,14 @@ function checkForTie() {
       square.classList.contains("cross") || square.classList.contains("circle")
     );
   });
+
   if (allSquaresFilled && !playerHasWon) {
     infoText.innerHTML = "It's a tie!";
     continueGame();
   }
 }
 
-// CONTINUE/ RESTART / RESET
+// CONTINUE / RESTART / RESET
 
 function continueGame() {
   removeSquareClick();
@@ -155,14 +161,14 @@ function reset() {
   infoText.innerHTML = `${nextPlayer}'s turn to start`;
 }
 
-//START GAME
+// START GAME
 
 function startGame() {
   startGameBtn.addEventListener("click", () => {
     modal.style.display = "flex";
   });
-  const form = document.querySelector("form");
 
+  const form = document.querySelector("form");
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
